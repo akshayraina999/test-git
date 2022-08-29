@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.contrib import messages
-from django.shortcuts import render, redirect  
+from django.shortcuts import render, redirect
 from .forms import EmployeeForm
 from .models import Employee, Posts
 from .forms import PostForm
@@ -50,46 +50,46 @@ def login(request):
     return render(request, 'login.html')
 
 
-def emp(request):  
-    if request.method == "POST":  
+def emp(request):
+    if request.method == "POST":
         form = EmployeeForm(request.POST)
         print(form.is_valid())
         print("hello")
-        
-        if form.is_valid():  
-            try:  
-                form.save()  
-                return redirect('/show')  
+
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/show')
             except Exception as e:
-                print(e)  
-                pass  
-    else:  
-        form = EmployeeForm()  
+                print(e)
+                pass
+    else:
+        form = EmployeeForm()
     return render(request, 'forms.html', {'form': form})
-    
 
-def show(request):  
-    employees = Employee.objects.all()  
+
+def show(request):
+    employees = Employee.objects.all()
     return render(request, "show.html", {'employees': employees})
-    
 
-def edit(request, id):  
-    employee = Employee.objects.get(id=id)  
+
+def edit(request, id):
+    employee = Employee.objects.get(id=id)
     return render(request, 'edit.html', {'employee': employee})
-    
 
-def update(request, id):  
-    employee = Employee.objects.get(id=id)  
-    form = EmployeeForm(request.POST, instance = employee)  
-    if form.is_valid():  
-        form.save()  
-        return redirect("/show")  
+
+def update(request, id):
+    employee = Employee.objects.get(id=id)
+    form = EmployeeForm(request.POST, instance=employee)
+    if form.is_valid():
+        form.save()
+        return redirect("/show")
     return render(request, 'edit.html', {'employee': employee})
-    
 
-def destroy(request, id):  
-    employee = Employee.objects.get(id=id)  
-    employee.delete()  
+
+def destroy(request, id):
+    employee = Employee.objects.get(id=id)
+    employee.delete()
     return redirect("/show")
 
 
@@ -154,5 +154,3 @@ def destroy_post(request, id):
     post = Posts.objects.get(id=id)
     post.delete()
     return redirect("/show_post")
-
-

@@ -11,5 +11,5 @@ class EmployeeForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Posts
-        # fields = ['blog_id', 'title', 'body', 'category']
-        fields = "__all__"
+        fields = ['blog_id', 'title', 'body', 'category']
+        # fields = "__all__"
